@@ -873,6 +873,168 @@
             padding: 1rem;
         }
     }
+
+    /* Updated search styles */
+    .search-container {
+        margin: 20px auto 30px;
+        max-width: 500px;
+        width: 90%;
+        position: relative;
+    }
+
+    .search-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 16px 45px;
+        border-radius: 30px;
+        border: 2px solid rgba(255,255,255,0.1);
+        background: rgba(20,20,20,0.8);
+        color: white;
+        font-size: 16px;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: #00A8E1;
+        box-shadow: 0 0 20px rgba(0,168,225,0.2);
+        background: rgba(30,30,30,0.9);
+    }
+
+    .search-input::placeholder {
+        color: rgba(255,255,255,0.4);
+        transition: color 0.3s ease;
+    }
+
+    .search-input:focus::placeholder {
+        color: rgba(255,255,255,0.6);
+    }
+
+    .search-icon {
+        position: absolute;
+        left: 15px;
+        width: 20px;
+        height: 20px;
+        color: rgba(255,255,255,0.4);
+        pointer-events: none;
+        transition: color 0.3s ease;
+    }
+
+    .search-input:focus + .search-icon {
+        color: #00A8E1;
+    }
+
+    .clear-search {
+        position: absolute;
+        right: 15px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255,255,255,0.4);
+        transition: all 0.3s ease;
+    }
+
+    .clear-search:hover {
+        color: #00A8E1;
+        transform: scale(1.1);
+    }
+
+    .clear-search svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .search-results {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(20,20,20,0.95);
+        border-radius: 15px;
+        margin-top: 10px;
+        max-height: 300px;
+        overflow-y: auto;
+        display: none;
+        border: 1px solid rgba(255,255,255,0.1);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .search-results::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .search-results::-webkit-scrollbar-track {
+        background: rgba(255,255,255,0.05);
+        border-radius: 4px;
+    }
+
+    .search-results::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.2);
+        border-radius: 4px;
+    }
+
+    .search-results::-webkit-scrollbar-thumb:hover {
+        background: rgba(255,255,255,0.3);
+    }
+
+    .search-result-item {
+        padding: 12px 20px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .search-result-item:hover {
+        background: rgba(0,168,225,0.1);
+    }
+
+    .search-result-item img {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        object-fit: cover;
+    }
+
+    .result-info {
+        flex: 1;
+    }
+
+    .result-title {
+        color: white;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    /* Animation for search results */
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .search-results.active {
+        display: block;
+        animation: slideDown 0.3s ease;
+    }
 </style>
 
 <body>
@@ -896,7 +1058,7 @@
     <div class="hero-section">
         <div class="hero-content">
             <h1 class="hero-title">
-                <span class="typing-text">OT ACCESS</span>
+                <span class="typing-text">OTT ACCESS</span>
             </h1>
             <p class="hero-subtitle">
                 <span class="slide-up">Premium Services & Games • Unbeatable Prices</span>
@@ -1033,7 +1195,7 @@
             </div>
             <ul class="features">
                 <li data-plan="Prime Basic Access - ₹49/month">Basic Access • ₹49/month</li>
-                <li data-plan="Prime Premium Access - ₹99/month">Premium Access • ₹99/month</li>
+               
                 <li data-plan="Prime 6-Month Basic - ₹149">6-Month Basic • ₹149</li>
                 <li data-plan="Prime 6-Month Premium - ₹349">6-Month Premium • ₹349</li>
                 <li data-plan="Prime Annual Basic - ₹349">Annual Basic • ₹349</li>
@@ -1125,8 +1287,32 @@
         </div>
     </div>
 
-    <center> <h2 class="heading-main" id="pc-games">PC GAMES</h2></center>
-    
+    <center> 
+        <h2 class="heading-main" id="pc-games">PC GAMES</h2>
+        <!-- Enhanced search container -->
+        <div class="search-container">
+            <div class="search-wrapper">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input 
+                    type="text" 
+                    id="gameSearch" 
+                    placeholder="Search your favorite games..."
+                    class="search-input"
+                >
+                <button class="clear-search" id="clearSearch" style="display: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </center>
+
     <div class="games-grid">
         <!-- Game cards will be dynamically inserted here -->
     </div>
@@ -1210,17 +1396,18 @@
             window.open(whatsappUrl, '_blank');
         }
 
-        // Import games data and create cards
+        // Modify the games import section to include search functionality
         import('./games.js')
             .then(module => {
                 const gamesData = module.gamesData;
                 const gamesGrid = document.querySelector('.games-grid');
                 
                 if (gamesGrid && gamesData) {
+                    // Create and store all game cards
                     gamesData.forEach(game => {
                         const discount = Math.round(((game.originalPrice - game.salePrice) / game.originalPrice) * 100);
                         const card = `
-                            <div class="game-card">
+                            <div class="game-card" data-title="${game.title.toLowerCase()}">
                                 <div class="game-discount">-${discount}%</div>
                                 <div class="game-image">
                                     <img src="${game.image}" alt="${game.title}" onerror="this.src='games/placeholder.jpg'">
@@ -1238,6 +1425,92 @@
                             </div>
                         `;
                         gamesGrid.innerHTML += card;
+                    });
+
+                    // Update the search functionality
+                    const searchInput = document.getElementById('gameSearch');
+                    const clearButton = document.getElementById('clearSearch');
+                    const searchResults = document.getElementById('searchResults');
+                    let debounceTimer;
+
+                    function updateClearButton() {
+                        clearButton.style.display = searchInput.value ? 'flex' : 'none';
+                    }
+
+                    function clearSearch() {
+                        searchInput.value = '';
+                        updateClearButton();
+                        searchResults.classList.remove('active');
+                        document.querySelectorAll('.game-card').forEach(card => {
+                            card.classList.remove('hidden');
+                        });
+                    }
+
+                    function performSearch() {
+                        const searchTerm = searchInput.value.toLowerCase().trim();
+                        const gameCards = document.querySelectorAll('.game-card');
+                        let hasResults = false;
+
+                        if (searchTerm === '') {
+                            searchResults.classList.remove('active');
+                            gameCards.forEach(card => card.classList.remove('hidden'));
+                            return;
+                        }
+
+                        searchResults.innerHTML = '';
+                        
+                        gameCards.forEach(card => {
+                            const title = card.dataset.title;
+                            const matches = title.includes(searchTerm);
+                            card.classList.toggle('hidden', !matches);
+
+                            if (matches) {
+                                hasResults = true;
+                                // Simplified result item without price
+                                const resultItem = document.createElement('div');
+                                resultItem.className = 'search-result-item';
+                                const image = card.querySelector('.game-image img').src;
+                                
+                                resultItem.innerHTML = `
+                                    <img src="${image}" alt="${title}">
+                                    <div class="result-info">
+                                        <div class="result-title">${title}</div>
+                                    </div>
+                                `;
+
+                                resultItem.addEventListener('click', () => {
+                                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    searchResults.classList.remove('active');
+                                });
+
+                                searchResults.appendChild(resultItem);
+                            }
+                        });
+
+                        searchResults.classList.toggle('active', hasResults && searchTerm !== '');
+                    }
+
+                    searchInput.addEventListener('input', () => {
+                        updateClearButton();
+                        clearTimeout(debounceTimer);
+                        debounceTimer = setTimeout(performSearch, 300);
+                    });
+
+                    clearButton.addEventListener('click', clearSearch);
+
+                    // Close search results when clicking outside
+                    document.addEventListener('click', (e) => {
+                        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                            searchResults.classList.remove('active');
+                        }
+                    });
+
+                    // Handle escape key
+                    document.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape') {
+                            searchResults.classList.remove('active');
+                            searchInput.blur();
+                        }
                     });
                 }
             })

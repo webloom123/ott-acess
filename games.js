@@ -4,35 +4,35 @@ const gamesData = [
         title: "No Man's Sky",
         originalPrice: 960,
         salePrice: 249,
-        image: "./games/gamename.jpg"
+        image: "./games/nomansky.jpg"
     },
     {
         title: "Outlast",
         originalPrice: 880,
         salePrice: 299,
-            image: "./games/gamename.jpg"
-        // image: "games/outlast.jpg"
+
+        image: "games/outlast.jpg"
     },
     {
         title: "Outlast 2",
         originalPrice: 1300,
         salePrice: 299,
-            image: "./games/gamename.jpg"
-        // image: "games/outlast2.jpg"
+        
+        image: "games/outlast2.jpg"
     },
     {
         title: "Ready or Not",
         originalPrice: 1995,
         salePrice: 349,
-            image: "./games/gamename.jpg"
-        // image: "games/readyornot.jpg"
+        
+        image: "games/readyornot.jpg"
     },
     {
         title: "Resident Evil 7",
         originalPrice: 1199,
         salePrice: 399,
-            image: "./games/gamename.jpg"
-        // image: "games/re7.jpg"
+           
+        image: "games/re7.jpg"
     },
     {
         title: "Resident Evil 4",
@@ -50,7 +50,7 @@ const gamesData = [
         title: "Rise of the Tomb Raider",
         originalPrice: 1499,
         salePrice: 249,
-        image: "games/riseofthetombraider.jpg"
+        image: "games/rtr.jpg"
     },
     {
         title: "Rust",
@@ -128,7 +128,7 @@ const gamesData = [
         title: "Tomb Raider",
         originalPrice: 749,
         salePrice: 349,
-        image: "games/tombraider.jpg"
+        image: "games/tr.jpg"
     },
     {
         title: "Uncharted: Legacy of Thieves Collection",
@@ -260,7 +260,7 @@ const gamesData = [
         title: "Call of Duty: Ghosts",
         originalPrice: 4997,
         salePrice: 499,
-        image: "games/codghosts.jpg"
+        image: "games/codeghosts.jpg"
     },
     {
         title: "God of War (2018)",

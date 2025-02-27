@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Streaming Subscriptions</title>
+    <link rel="stylesheet" href="style/navbar.css">
+    <link rel="stylesheet" href="style/portfolio.css">
+    <link rel="stylesheet" href="style/services.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/stacking.css">
+    <link rel="stylesheet" href="style/timeline.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+        background-size: cover;
+        color: white;
+        justify-content: center;
+        align-items: flex-start;
+        background-color: #0a0a0a;
+        min-height: 100vh;
+    }
+
+    .hero-section {
+     
+        min-height: 85vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-content {
+        text-align: center;
+        padding: 48px 24px;
+        max-width: 900px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 24px;
+        background: linear-gradient(45deg, #fff, #e6e6e6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+        color: rgba(255,255,255,0.9);
+        line-height: 1.6;
+        margin-bottom: 32px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-cta {
+        display: inline-flex;
+        gap: 16px;
+        margin-top: 16px;
+    }
+
+    .hero-button {
+        padding: 16px 32px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .primary-button {
+        background: linear-gradient(45deg, #00A8E1, #00A8E1);
+        color: white;
+        border: none;
+        box-shadow: 0 4px 15px rgba(0, 168, 225, 0.3);
+    }
+
+    .primary-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 168, 225, 0.4);
+    }
+
+    .secondary-button {
+        background: transparent;
+        color: white;
+        border: 2px solid rgba(255,255,255,0.3);
+    }
+
+    .secondary-button:hover {
+        border-color: #00A8E1;
+        background: rgba(0, 168, 225, 0.1);
+    }
+
+    .subscription-card {
+        background: linear-gradient(145deg, rgba(20,20,20,0.95), rgba(15,15,15,0.98));
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 16px;
+        padding: 24px;
+        margin: 10px;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        width: 280px;
+        height: fit-content; /* Changed from min-height to fit-content */
+        backdrop-filter: blur(10px);
+    }
+
+    /* Platform-specific card styles */
+    .subscription-card.netflix {
+        background: linear-gradient(145deg, rgba(20,20,20,0.95), rgba(229,9,20,0.15));
+    }
+
+    .subscription-card.prime {
+        background: linear-gradient(145deg, rgba(20,20,20,0.95), rgba(0,168,225,0.15));
+    }
+
+    .subscription-card.hotstar {
+        background: linear-gradient(145deg, rgba(20,20,20,0.95), rgba(30,144,255,0.15));
+    }
+
+    .subscription-card.zee5 {
+        background: linear-gradient(145deg, rgba(20,20,20,0.95), rgba(138,43,226,0.15));
+    }
+
+    .subscription-card.sonyliv {
+        background: linear-gradient(145deg, rgba(20,20,20,0.95), rgba(255,69,0,0.15));
+    }
+
+    .subscription-card.spotify {
+        background: linear-gradient(145deg, rgba(20,20,20,0.95), rgba(30,215,96,0.15));
+    }
+
+    .subscription-card.pornhub {
+        background: linear-gradient(145deg, rgba(20,20,20,0.95), rgba(255,165,0,0.15));
+    }
+
+    /* Platform-specific hover effects */
+    .subscription-card.netflix:hover {
+        border-color: rgba(229,9,20,0.5);
+        box-shadow: 0 12px 36px rgba(229,9,20,0.3);
+        transform: translateY(-5px);
+    }
+
+    .subscription-card.prime:hover {
+        border-color: rgba(0,168,225,0.5);
+        box-shadow: 0 12px 36px rgba(0,168,225,0.3);
+        transform: translateY(-5px);
+    }
+
+    .subscription-card.hotstar:hover {
+        border-color: rgba(30,144,255,0.5);
+        box-shadow: 0 12px 36px rgba(30,144,255,0.3);
+        transform: translateY(-5px);
+    }
+
+    .subscription-card.zee5:hover {
+        border-color: rgba(138,43,226,0.5);
+        box-shadow: 0 12px 36px rgba(138,43,226,0.3);
+        transform: translateY(-5px);
+    }
+
+    .subscription-card.sonyliv:hover {
+        border-color: rgba(255,69,0,0.5);
+        box-shadow: 0 12px 36px rgba(255,69,0,0.3);
+        transform: translateY(-5px);
+    }
+
+    .subscription-card.spotify:hover {
+        border-color: rgba(30,215,96,0.5);
+        box-shadow: 0 12px 36px rgba(30,215,96,0.3);
+        transform: translateY(-5px);
+    }
+
+    .subscription-card.pornhub:hover {
+        border-color: rgba(255,165,0,0.5);
+        box-shadow: 0 12px 36px rgba(255,165,0,0.3);
+        transform: translateY(-5px);
+    }
+
+    .price {
+        font-size: 28px;
+        background: linear-gradient(45deg, #00A8E1, #0077ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 700;
+        margin: 8px 0;
+    }
+
+    .platform-title {
+        font-size: 18px;
+        background: linear-gradient(120deg, #ffffff 20%, #e6e6e6 40%, #ffffff 60%, #e6e6e6 80%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 16px;
+        text-align: left;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        animation: shimmer 2s linear infinite;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
+
+    @keyframes shimmer {
+        to {
+            background-position: 200% center;
+        }
+    }
+
+    .features {
+        list-style: none;
+        padding: 0;
+    }
+
+    .features li {
+        margin: 12px 0;
+        color: rgba(255,255,255,0.9);
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        line-height: 1.6;
+        font-weight: 500;
+        background: rgba(255,255,255,0.05);
+        padding: 10px 14px;
+        border-radius: 8px;
+        backdrop-filter: blur(5px);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    /* Style for non-selectable feature info items */
+    .features li.feature-info {
+        background: transparent;
+        border: 1px dashed rgba(255,255,255,0.1);
+        color: rgba(255,255,255,0.7);
+        font-size: 13px;
+        cursor: default;
+        padding: 8px 14px;
+        font-weight: 400;
+    }
+
+    .features li.feature-info:hover {
+        background: transparent;
+        transform: none;
+    }
+
+    /* Add an icon before feature info items */
+    .features li.feature-info::before {
+        content: "✓";
+        margin-right: 8px;
+        color: #00A8E1;
+        font-weight: bold;
+    }
+
+    /* Keep existing styles for selectable items */
+    .features li:not(.feature-info) {
+        background: rgba(255,255,255,0.05);
+        cursor: pointer;
+    }
+
+    .features li.selected {
+        border: 2px solid #00A8E1;
+        background: rgba(0, 168, 225, 0.1);
+        transform: scale(1.02);
+    }
+
+    .features li:not(.feature-info):hover {
+        background: rgba(255,255,255,0.1);
+    }
+
+    .cta-button {
+        background: linear-gradient(45deg, #00A8E1, #0077ff);
+        color: white;
+        border: none;
+        padding: 16px 32px;
+        border-radius: 12px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 24px;
+        font-weight: 600;
+        font-size: 16px;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        box-shadow: 0 4px 15px rgba(0,168,225,0.3);
+    }
+
+    .cta-button:hover {
+        background: linear-gradient(45deg, #0077ff, #00A8E1);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0,168,225,0.4);
+    }
+
+    .subscriptions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 300px);
+        gap: 24px;
+        padding: 32px;
+        max-width: 1200px;
+        margin: 0 auto;
+        justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+        .subscriptions-grid {
+            grid-template-columns: 1fr;
+            padding: 16px;
+        }
+        
+        .subscription-card {
+            width: 100%;
+            max-width: 280px;
+            margin: 10px auto;
+        }
+    }
+
+    .contact-info {
+        text-align: center;
+        padding: 48px;
+        background: rgba(20,20,20,0.95);
+        margin-top: 64px;
+        border-radius: 16px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .contact-info p {
+        color: rgba(255,255,255,0.9);
+        margin: 12px 0;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .contact-info .phone {
+        background: linear-gradient(45deg, #00A8E1, #0077ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin: 24px 0;
+    }
+
+    .card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 24px;
+        gap: 20px;
+    }
+
+    .platform-logo img {
+        width: 40px;     /* Fixed width */
+        height: 40px;    /* Fixed height */
+        object-fit: cover; /* Changed to cover to fill the space */
+        padding: 0;      /* Remove any padding */
+        margin: 0;       /* Remove any margin */
+    }
+
+    .platform-logo {
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,0.05);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+        padding: 0;      /* Removed padding */
+        overflow: hidden; /* Ensure image stays within bounds */
+    }
+
+    .platform-info {
+        flex-grow: 1;
+    }
+
+    .whatsapp-float {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: linear-gradient(45deg, #25D366, #128C7E);
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        transition: all 0.4s ease;
+        z-index: 1000;
+        /* Add subtle glow effect */
+        animation: pulse 2s infinite;
+        backdrop-filter: blur(5px);
+    }
+
+    .whatsapp-float::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: inherit;
+        border-radius: 50%;
+        z-index: -1;
+        transition: all 0.4s ease;
+        opacity: 0.7;
+        transform: scale(1);
+    }
+
+    .whatsapp-float:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 30px rgba(37, 211, 102, 0.5);
+        background: linear-gradient(45deg, #128C7E, #25D366);
+    }
+
+    .whatsapp-float:hover::before {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+
+    .whatsapp-float svg {
+        width: 32px;
+        height: 32px;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        transition: transform 0.3s ease;
+    }
+
+    .whatsapp-float:hover svg {
+        transform: scale(1.1);
+    }
+
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+        }
+        70% {
+            box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+        }
+    }
+
+    /* Tooltip style */
+    .whatsapp-float::after {
+        content: 'Chat with us!';
+        position: absolute;
+        right: 80px;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 14px;
+        opacity: 0;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        pointer-events: none;
+        backdrop-filter: blur(5px);
+    }
+
+    .whatsapp-float:hover::after {
+        opacity: 1;
+        transform: translateX(-10px);
+    }
+
+    @media screen and (max-width: 768px) {
+        .whatsapp-float {
+            width: 55px;
+            height: 55px;
+            right: 20px;
+            bottom: 20px;
+        }
+
+        .whatsapp-float svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .whatsapp-float::after {
+            display: none; /* Hide tooltip on mobile */
+        }
+    }
+</style>
+
+<body>
+    <header style="display: flex; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; right: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); z-index: 1000; padding: 0.5rem 0;">
+        <div class="navbar">
+            <div class="navbar-logo">
+                <img style="width: 50px; height: auto;" src="./logo.png" alt="Nclox Logo">
+            </div>
+            <div class="navbar-menu">
+                <a href="#home" style="color: #00A8E1;" class="nav-link">Services</a>
+                <a href="#hiw" class="nav-link">Testimonials</a>
+                <a href="#faqs" class="nav-link">FAQs</a>
+            </div>
+            <button class="navbar-button">Book A Call</button>
+            <div class="hamburger">☰</div>
+        </div>
+    </header>
+
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="typing-text">OT ACCESS</span>
+            </h1>
+            <p class="hero-subtitle">
+                <span class="slide-up">Premium Services • Unbeatable Prices</span>
+                <span class="slide-up-2">4K Ultra HD Quality • Instant Access</span>
+                <span class="slide-up-3">24/7 Customer Support • Secure Payment</span>
+            </p>
+            <div class="hero-cta">
+                <button class="hero-button primary-button">Get Premium Access</button>
+            </div>
+        </div>
+        <style>
+
+
+
+.heading-main {
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(45deg, #4B0082, #800080); /* Royal purple gradient */
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: inline-block;
+    border: 1px solid #483D8B; /* Dark slate blue border */
+    position: relative;
+    overflow: hidden;
+}
+
+.heading-main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    
+    animation: shine 5s infinite 3s;
+}
+
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+    50% {
+        left: 100%;
+    }
+    100% {
+        left: -100%;
+    }
+}
+
+
+
+            .typing-text {
+                font-size: clamp(2.5rem, 8vw, 4.5rem);
+                background: linear-gradient(45deg, #00A8E1, #fff);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                border-right: 4px solid #00A8E1;
+                white-space: nowrap;
+                overflow: hidden;
+                animation: typing 2s steps(20), blink .5s infinite;
+            }
+
+            .slide-up, .slide-up-2, .slide-up-3 {
+                display: block;
+                font-size: clamp(1rem, 4vw, 1.5rem);
+                color: #fff;
+                opacity: 0;
+                transform: translateY(20px);
+                text-shadow: 0 0 10px rgba(0,168,225,0.4);
+                font-weight: 500;
+            }
+
+            .slide-up { animation: slideUp 0.5s forwards 2s; }
+            .slide-up-2 { animation: slideUp 0.5s forwards 2.3s; }
+            .slide-up-3 { animation: slideUp 0.5s forwards 2.6s; }
+
+            .hero-button {
+                background: linear-gradient(45deg, #00A8E1, #0077ff);
+                color: white;
+                font-size: 1.1rem;
+                padding: 12px 30px;
+                border-radius: 30px;
+                border: none;
+                cursor: pointer;
+                transition: all 0.2s;
+                box-shadow: 0 0 20px rgba(0,168,225,0.4);
+                font-weight: 600;
+            }
+
+            .hero-button:hover {
+                transform: scale(1.05);
+                box-shadow: 0 0 30px rgba(0,168,225,0.6);
+            }
+
+            @media screen and (max-width: 768px) {
+                .hero-content { padding: 24px 16px; }
+                .hero-cta { flex-direction: column; gap: 12px; }
+            }
+
+            @keyframes typing {
+                from { width: 0 }
+                to { width: 100% }
+            }
+
+            @keyframes blink {
+                50% { border-color: transparent }
+            }
+
+            @keyframes slideUp {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
+    </div>
+
+
+   <center> <h2 class="heading-main">OTT SERVICES</h2></center>
+
+    <div class="subscriptions-grid">
+        <div class="subscription-card netflix">
+            <div class="card-header">
+                <div class="platform-logo"><img src="ott/netflix.png" alt="Netflix Logo"></div>
+                <div class="platform-info">
+                    <h2 class="platform-title">Netflix 4K</h2>
+                </div>
+            </div>
+            <ul class="features">
+                <li data-plan="Netflix Premium 1 Screen - ₹149/month">Premium 1 Screen • ₹149/month</li>
+                <li data-plan="Netflix Ultra HD 2 Screens - ₹249/month">Ultra HD 2 Screens • ₹249/month</li>
+                <li data-plan="Netflix 6-Month Premium - ₹799">6-Month Premium • ₹799</li>
+                <li class="feature-info">4K Ultra HD + HDR Support</li>
+                <li class="feature-info">Unlimited Downloads</li>
+            </ul>
+            <button class="cta-button" onclick="sendToWhatsApp('netflix')">Buy</button>
+        </div>
+
+        <div class="subscription-card prime">
+            <div class="card-header">
+                <div class="platform-logo"><img src="ott/prime.png" alt="Prime Logo"></div>
+                <div class="platform-info">
+                    <h2 class="platform-title">Prime Video</h2>
+                </div>
+            </div>
+            <ul class="features">
+                <li data-plan="Prime Basic Access - ₹49/month">Basic Access • ₹49/month</li>
+                <li data-plan="Prime Premium Access - ₹99/month">Premium Access • ₹99/month</li>
+                <li data-plan="Prime 6-Month Basic - ₹149">6-Month Basic • ₹149</li>
+                <li data-plan="Prime 6-Month Premium - ₹349">6-Month Premium • ₹349</li>
+                <li data-plan="Prime Annual Basic - ₹349">Annual Basic • ₹349</li>
+                <li data-plan="Prime Annual Premium - ₹599">Annual Premium • ₹599</li>
+            </ul>
+            <button class="cta-button" onclick="sendToWhatsApp('prime')">Buy</button>
+        </div>
+
+        <div class="subscription-card hotstar">
+            <div class="card-header">
+                <div class="platform-logo"><img src="ott/hotstar.png" alt="Hotstar Logo"></div>
+                <div class="platform-info">
+                    <h2 class="platform-title">Hotstar</h2>
+                </div>
+            </div>
+            <ul class="features">
+                <li data-plan="Hotstar 3-Month Basic - ₹79">3-Month Basic • ₹79</li>
+                <li data-plan="Hotstar Annual Basic - ₹249">Annual Basic • ₹249</li>
+                <li data-plan="Hotstar Premium Monthly - ₹99">Premium Monthly • ₹99</li>
+                <li data-plan="Hotstar Premium Annual - ₹449">Premium Annual • ₹449</li>
+                <li class="feature-info">Live Sports & Events Access</li>
+            </ul>
+            <button class="cta-button" onclick="sendToWhatsApp('hotstar')">Buy</button>
+        </div>
+
+        <div class="subscription-card zee5">
+            <div class="card-header">
+                <div class="platform-logo"><img src="ott/zee5.png" alt="Zee5 Logo"></div>
+                <div class="platform-info">
+                    <h2 class="platform-title">Zee5</h2>
+                </div>
+            </div>
+            <ul class="features">
+                <li data-plan="Zee5 Basic Monthly - ₹49">Basic Monthly • ₹49</li>
+                <li data-plan="Zee5 Annual Basic - ₹249">Annual Basic • ₹249</li>
+                <li data-plan="Zee5 Premium Annual - ₹449">Premium Annual • ₹449</li>
+                <li class="feature-info">Exclusive Regional Content</li>
+            </ul>
+            <button class="cta-button" onclick="sendToWhatsApp('zee5')">Buy</button>
+        </div>
+
+        <div class="subscription-card sonyliv">
+            <div class="card-header">
+                <div class="platform-logo"><img src="ott/sonylive.png" alt="SonyLIV Logo"></div>
+                <div class="platform-info">
+                    <h2 class="platform-title">Sony LIV</h2>
+                </div>
+            </div>
+            <ul class="features">
+                <li data-plan="Sony LIV Basic Monthly - ₹49">Basic Monthly • ₹49</li>
+                <li data-plan="Sony LIV Annual Basic - ₹299">Annual Basic • ₹299</li>
+                <li data-plan="Sony LIV Premium Annual - ₹449">Premium Annual • ₹449</li>
+                <li class="feature-info">Live TV & Sports Access</li>
+            </ul>
+            <button class="cta-button" onclick="sendToWhatsApp('sonyliv')">Buy</button>
+        </div>
+
+        <div class="subscription-card spotify">
+            <div class="card-header">
+                <div class="platform-logo"><img src="ott/spotify.png" alt="Spotify Logo"></div>
+                <div class="platform-info">
+                    <h2 class="platform-title">Spotify</h2>
+                </div>
+            </div>
+            <ul class="features">
+                <li data-plan="Spotify Premium 2-Month - ₹55">Premium 2-Month • ₹55</li>
+                <li class="feature-info">Ad-free Premium Music</li>
+                <li class="feature-info">Unlimited Downloads</li>
+                <li class="feature-info">High-Fidelity Audio</li>
+            </ul>
+            <button class="cta-button" onclick="sendToWhatsApp('spotify')">Buy</button>
+        </div>
+
+        <div class="subscription-card pornhub">
+            <div class="card-header">
+                <div class="platform-logo"><img src="ott/pornhub.png" alt="Porn Hub Logo"></div>
+                <div class="platform-info">
+                    <h2 class="platform-title">Porn Hub</h2>
+                </div>
+            </div>
+            <ul class="features">
+                <li data-plan="Porn Hub 1 Month - ₹149">1 Month • ₹149</li>
+                <li data-plan="Porn Hub 6 Months - ₹349">6 Months • ₹349</li>
+                <li class="feature-info">Premium HD Content</li>
+                <li class="feature-info">Ad-free Experience</li>
+                <li class="feature-info">Unlimited Streaming</li>
+            </ul>
+            <button class="cta-button" onclick="sendToWhatsApp('pornhub')">Buy</button>
+        </div>
+    </div>
+
+    <div class="contact-info" id="contact">
+        <h2 style="font-size: 28px; font-weight: 600; margin-bottom: 16px;">Contact Us</h2>
+        <p>For inquiries and subscriptions:</p>
+       
+        <p>Available 24/7</p>
+    </div>
+
+    <footer style="background-color: #0a0a0a; color: rgba(255,255,255,0.7); text-align: center; padding: 1.5rem 0; position: relative;">
+        <p style="margin: 0; font-size: 13px;">© 2024 Premium Streaming Services. All rights reserved.</p>
+    </footer>
+
+    <a href="https://wa.me/919520526693" class="whatsapp-float" target="_blank" aria-label="Chat with us on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="white">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 1.856.001 3.598.723 4.907 2.034 1.31 1.311 2.031 3.054 2.03 4.908-.001 3.825-3.113 6.938-6.937 6.938z"/>
+        </svg>
+    </a>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navbarMenu = document.querySelector('.navbar-menu');
+
+        hamburger.addEventListener('click', () => {
+            navbarMenu.classList.toggle('active');
+            hamburger.innerHTML = navbarMenu.classList.contains('active') ? '×' : '☰';
+        });
+
+        // Add click handlers for plan selection
+        document.querySelectorAll('.features li').forEach(li => {
+            if (!li.classList.contains('feature-info')) {  // Skip non-selectable features
+                li.addEventListener('click', function() {
+                    // Remove selected class from all items in this card
+                    this.closest('.features').querySelectorAll('li').forEach(item => {
+                        if (!item.classList.contains('feature-info')) {
+                            item.classList.remove('selected');
+                        }
+                    });
+                    // Add selected class to clicked item
+                    this.classList.add('selected');
+                });
+            }
+        });
+
+        function sendToWhatsApp(platform) {
+            const card = document.querySelector(`.subscription-card.${platform}`);
+            const selectedPlan = card.querySelector('.features li.selected');
+            
+            if (!selectedPlan) {
+                alert('Please select a plan first');
+                return;
+            }
+
+            const message = `Hi, I would like to subscribe to: ${selectedPlan.dataset.plan}`;
+            const phoneNumber = '919520526693'; // Added country code 91 for India
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+
+</body>
+</html>

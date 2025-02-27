@@ -24,21 +24,39 @@
 
     /* ===== Section Headers ===== */
     .heading-main {
-        font-size: 1rem;
-        font-weight: 600;
+        font-size: 1.2rem;
+        font-weight: 700;
         color: white;
-        background: linear-gradient(45deg, #4B0082, #800080);
-        padding: 10px 20px;
-        border-radius: 20px;
+        background: linear-gradient(45deg, #8A2BE2, #4B0082, #2b0047);
+        padding: 12px 28px;
+        border-radius: 25px;
         display: inline-block;
-        border: 1px solid #483D8B;
+        border: 1px solid rgba(255, 255, 255, 0.15);
         position: relative;
         overflow: hidden;
+        box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3),
+                    inset 0 0 20px rgba(255, 255, 255, 0.1);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        animation: shine 2s infinite;
+    }
+
+    @keyframes shine {
+        0% {
+            background-position: 200% center;
+        }
+        50% {
+            box-shadow: 0 4px 25px rgba(138, 43, 226, 0.5),
+                        inset 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+        100% {
+            background-position: -200% center;
+        }
     }
 
     /* ===== Hero Section Styles ===== */
     .hero-section {
-        min-height: 85vh;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -864,7 +882,7 @@
                 <img style="width: 50px; height: auto;" src="./logo.png" alt="Nclox Logo">
             </div>
             <div class="navbar-menu">
-                <a href="#home" style="color: #00A8E1;" class="nav-link">Services</a>
+                <a href="#services" style="color: #00A8E1;" class="nav-link">Services</a>
                 <a href="#ott" class="nav-link">Ott</a>
                 <a href="#pc-games" class="nav-link">Games</a>
                 <a href="#hiw" class="nav-link">Testimonials</a
@@ -881,9 +899,9 @@
                 <span class="typing-text">OT ACCESS</span>
             </h1>
             <p class="hero-subtitle">
-                <span class="slide-up">Premium Services • Unbeatable Prices</span>
+                <span class="slide-up">Premium Services & Games • Unbeatable Prices</span>
                 <span class="slide-up-2">4K Ultra HD Quality • Instant Access</span>
-                <span class="slide-up-3">24/7 Customer Support • Secure Payment</span>
+               
             </p>
             <div class="hero-cta">
                 <button class="hero-button primary-button">Get Premium Access</button>
